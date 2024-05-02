@@ -12,14 +12,14 @@
     <link name="chassis">
         <visual>
             <geometry>
-                <box size="0.6 0.1 0.2"/>
+                <box size="0.28 0.14 0.082"/>
             </geometry>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <material name="blue"/>
         </visual>
         <collision>
             <geometry>
-                <box size="0.6 0.1 0.2"/>
+                <box size="0.28 0.14 0.082"/>
             </geometry>
             <origin rpy="0 0 0" xyz="0 0 0"/>
         </collision>
@@ -31,7 +31,7 @@
     <joint name="base_chassis" type="fixed">
         <parent link="base_link"/>
         <child link="chassis"/>
-        <origin xyz="0 0 0"/>
+        <origin xyz="0 0 0.0615"/>
     </joint>    
 
     <!-- Define the wheels -->
@@ -39,16 +39,16 @@
         <link name="${prefix}_wheel">
             <visual>
                 <geometry>
-                    <cylinder length="0.6" radius="0.2"/>
+                    <cylinder length="0.035" radius="0.035"/>
                 </geometry>
-                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <origin rpy="1.57 0 0" xyz="0 0 0"/>
                 <material name="black"/>
             </visual>
             <collision>
                 <geometry>
-                    <cylinder length="0.6" radius="0.2"/>
+                    <cylinder length="0.035" radius="0.035"/>
                 </geometry>
-                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <origin rpy="1.57 0 0" xyz="0 0 0"/>
             </collision>
             <inertial>
                 <mass value="10"/>
@@ -65,11 +65,11 @@
     </xacro:macro>
 
     <!-- Create 6 wheels -->
-    <xacro:wheel prefix="wheel1" xyz="0.2 0.01 0"/>
-    <xacro:wheel prefix="wheel2" xyz="0.2 0.01 0"/>
-    <xacro:wheel prefix="wheel3" xyz="0.2 0.01 0"/>
-    <xacro:wheel prefix="wheel4" xyz="0.2 0.01 0"/>
-    <xacro:wheel prefix="wheel5" xyz="0.2 0.01 0"/>
-    <xacro:wheel prefix="wheel6" xyz="0.2 0.01 0"/>
+    <xacro:wheel prefix="wheel1" xyz="0.105 0.0925 -0.031"/>
+    <xacro:wheel prefix="wheel2" xyz="0.105 -0.0925 -0.031"/>
+    <xacro:wheel prefix="wheel3" xyz="0.0 0.0925 -0.031"/>
+    <xacro:wheel prefix="wheel4" xyz="0.0 -0.0925 -0.031"/>
+    <xacro:wheel prefix="wheel5" xyz="-0.105 0.0925 -0.031"/>
+    <xacro:wheel prefix="wheel6" xyz="-0.105 -0.0925 -0.031"/>
 
 </robot>
