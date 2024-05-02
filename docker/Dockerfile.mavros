@@ -1,12 +1,32 @@
 FROM ros:humble-ros-core-jammy
 
+ENV ROS_WORKSPACE=/humble_ws
+ENV WS_SOURCE=.
+
+ENV SHELL /bin/bash
+SHELL ["/bin/bash", "-c"]
+
 RUN apt update && \
- apt -y install ros-humble-mavros ros-humble-mavros-extras ros-humble-ntrip-client && \
- /opt/ros/humble/lib/mavros/install_geographiclib_datasets.sh
+ apt -y install ros-humble-mavros ros-humble-mavros-extras ros-humble-ntrip-client python3-rosdep && \
+    rosdep init && rosdep update && \
+    /opt/ros/humble/lib/mavros/install_geographiclib_datasets.sh
+
+ ADD ${WS_SOURCE} /src
+
+ WORKDIR ${ROS_WORKSPACE}
+
+ # It could be removed if we compile in host and copy the binaries
+ RUN apt -y install ros-dev-tools
+
+ RUN mkdir -p ${ROS_WORKSPACE}/src && \
+   cp -r /src/* ${ROS_WORKSPACE}/src && \
+   rosdep install --from-paths src -y --ignore-src && \
+   source /opt/ros/humble/setup.bash && colcon build
+
 
 # ros2 run mavros mavros_node --ros-args -p fcu_url:=/dev/ttyACM1 -p gcs_url:=udp://@192.168.1.107
 # docker create -t --restart unless-stopped --name ros-humble --net=host -v /dev:/dev --privileged ros-humble
 
-COPY ros_entrypoint.sh /
+COPY ./docker/ros_entrypoint.sh /
 
 ENTRYPOINT ["/ros_entrypoint.sh"]

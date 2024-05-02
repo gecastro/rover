@@ -1,8 +1,8 @@
 services:
   mavros:
     build:
-      context: .
-      dockerfile: Dockerfile.mavros
+      context: ..
+      dockerfile: ./docker/Dockerfile.mavros
     ipc: host
     network_mode: host
     environment:
