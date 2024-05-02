@@ -32,7 +32,12 @@
         <parent link="base_link"/>
         <child link="chassis"/>
         <origin xyz="0 0 0.0615"/>
-    </joint>    
+    </joint>
+
+    <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+    <xacro:sensor_d435 name="camera" parent="chassis">
+        <origin xyz="0.12 0.0 0.071" rpy="0 0 0"/>
+    </xacro:sensor_d435>    
 
     <!-- Define the wheels -->
     <xacro:macro name="wheel" params="prefix xyz">
