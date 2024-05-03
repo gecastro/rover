@@ -4,6 +4,8 @@ from launch.actions import DeclareLaunchArgument
 from launch_ros.actions import Node
 from ament_index_python import get_package_share_directory
 from launch.substitutions import LaunchConfiguration
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 def generate_launch_description():
     ld = LaunchDescription()
@@ -88,6 +90,10 @@ def generate_launch_description():
         }]
     )
 
+    realsense_include = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory('realsense2_camera'), 'launch', 'rs_launch.py'))
+    )
+
     ld.add_action(fcu_url_arg)
     ld.add_action(gcs_url_arg)
     ld.add_action(tgt_component_arg)
@@ -98,6 +104,7 @@ def generate_launch_description():
     ld.add_action(pluginlists_yaml_arg)
     ld.add_action(config_yaml_arg)
     ld.add_action(mavros_node)
+    ld.add_action(realsense_include)
 
     return ld
 
