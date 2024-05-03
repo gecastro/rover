@@ -5,6 +5,7 @@ services:
       dockerfile: ./docker/Dockerfile.mavros
     ipc: host
     network_mode: host
+    restart: unless-stopped
     environment:
       - ROS_DISTRO=humble
       - ROS_DOMAIN_ID=1
