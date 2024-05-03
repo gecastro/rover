@@ -91,7 +91,7 @@ def generate_launch_description():
     )
 
     realsense_include = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory('realsense2_camera'), 'launch', 'rs_launch.py'))
+        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory('rover_bringup'), 'launch', 'rs_launch.py'))
     )
 
     ld.add_action(fcu_url_arg)
