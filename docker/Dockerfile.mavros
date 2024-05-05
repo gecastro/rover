@@ -17,7 +17,7 @@ RUN apt update && \
  RUN apt -y install ros-dev-tools
 
  RUN mkdir -p ${ROS_WORKSPACE}/src && \
-   git clone https://github.com/gecastro/rover.git ${ROS_WORKSPACE}/src/rover && \
+   git clone https://github.com/gecastro/rover.git  -b docker-containers ${ROS_WORKSPACE}/src/rover && \
    git clone https://github.com/IntelRealSense/realsense-ros.git ${ROS_WORKSPACE}/src/realsense-ros && \
    rosdep install --from-paths src -y --ignore-src && \
    source /opt/ros/humble/setup.bash && colcon build
