@@ -7,11 +7,9 @@ ENV SHELL /bin/bash
 SHELL ["/bin/bash", "-c"]
 
 RUN apt update && \
- apt -y install ros-humble-mavros ros-humble-mavros-extras ros-humble-ntrip-client python3-rosdep && \
+ apt -y install ros-humble-mavros ros-humble-mavros-extras ros-humble-ntrip-client python3-rosdep git && \
     rosdep init && rosdep update && \
     /opt/ros/humble/lib/mavros/install_geographiclib_datasets.sh
-
- ADD ${WS_SOURCE} /src
 
  WORKDIR ${ROS_WORKSPACE}
 
@@ -19,7 +17,8 @@ RUN apt update && \
  RUN apt -y install ros-dev-tools
 
  RUN mkdir -p ${ROS_WORKSPACE}/src && \
-   cp -r /src/* ${ROS_WORKSPACE}/src && \
+   git clone https://github.com/gecastro/rover.git ${ROS_WORKSPACE}/src/rover && \
+   git clone https://github.com/IntelRealSense/realsense-ros.git ${ROS_WORKSPACE}/src/realsense-ros && \
    rosdep install --from-paths src -y --ignore-src && \
    source /opt/ros/humble/setup.bash && colcon build
 
