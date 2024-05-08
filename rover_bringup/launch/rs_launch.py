@@ -84,7 +84,8 @@ configurable_parameters = [{'name': 'camera_name',                  'default': '
                            {'name': 'depth_module.profile',         'default': '0,0,0', 'description': 'depth stream profile'},
                            {'name': 'colorizer.enable',             'default': 'true', 'description': 'enable colorizer filter'},
                            {'name': 'disparity_filter.enable',      'default': 'true', 'description': 'enable_disparity_filter'},
-                           {'name': 'ffmpeg_image_transport.encoding','default': 'h264_vaapi', 'description': 'Use hardware encoding with ffmpeg transport'},
+                           {'name': 'ffmpeg_image_transport.encoding','default': 'hvec_vaapi', 'description': 'Use hardware encoding with ffmpeg transport'},
+                           {'name': 'ffmpeg_image_transport.qmax',  'default': '1', 'description': 'Use hardware encoding with ffmpeg transport'},
                            {'name': 'colorizer.min_distance','default': '0.10', 'description': 'Minimum distance for the colorizer filter'},
                            {'name': 'colorizer.max_distance','default': '3.0', 'description': 'Maximum distance for the colorizer filter'},
 
